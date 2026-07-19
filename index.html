@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-  
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,9 +17,11 @@
     header {
       background: linear-gradient(135deg, #6b3e26, #8b5e3c);
       color: #fff;
-      padding: 2rem;
+      padding: 1.5rem;
       text-align: center;
-      animation: fadeInDown 1.5s ease;
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+      animation: fadeDown 1.5s ease;
     }
 
     nav {
@@ -31,6 +32,7 @@
       position: sticky;
       top: 0;
       z-index: 1000;
+      animation: fadeUp 1.5s ease;
     }
 
     nav a {
@@ -42,60 +44,70 @@
 
     nav a:hover {
       background: #8b5e3c;
-      transform: scale(1.1);
+      transform: scale(1.05);
     }
 
     .hero {
-  position: relative;
-  height: 350px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  text-shadow: 2px 2px 5px #000;
-  font-size: 2.5rem;
-  text-align: center;
-  overflow: hidden;
-}
+      position: relative;
+      height: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
 
-/* Background image with low opacity overlay */
-.hero::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: url('GBR image.jpg') no-repeat center center/cover;
-  opacity: 0.35; /* adjust between 0.2–0.5 for desired softness */
-  z-index: 0;
-}
+    /* Background image with gradient overlay */
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.3)),
+                  url('gbr-image.jpg') no-repeat center center/cover;
+      z-index: 0;
+    }
 
-.hero h1, .hero p {
-  position: relative;
-  z-index: 1;
-}
+    /* Animated hero text */
+    .hero h1 {
+      position: relative;
+      z-index: 1;
+      color: #fff;
+      font-size: 3rem;
+      font-weight: bold;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.9);
+      margin-bottom: 0.5rem;
+      animation: fadeZoom 2s ease forwards;
+    }
 
+    .hero p {
+      position: relative;
+      z-index: 1;
+      color: #f0f0f0;
+      font-size: 1.2rem;
+      text-shadow: 1px 1px 6px rgba(0,0,0,0.8);
+      background: rgba(0,0,0,0.4);
+      padding: 0.4rem 1rem;
+      border-radius: 6px;
+      animation: fadeUp 2s ease forwards;
+    }
 
     section {
       padding: 2rem;
       max-width: 1000px;
       margin: auto;
-      animation: fadeInUp 1.5s ease;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: fadeInUp 1.5s ease forwards;
     }
 
     h2 {
       color: #6b3e26;
       margin-bottom: 1rem;
-      position: relative;
-    }
-
-    h2::after {
-      content: '';
-      display: block;
-      width: 50px;
-      height: 3px;
-      background: #8b5e3c;
-      margin-top: 5px;
-      animation: slideIn 1s ease;
+      border-bottom: 3px solid #8b5e3c;
+      display: inline-block;
+      padding-bottom: 0.3rem;
     }
 
     .menu-grid {
@@ -111,10 +123,11 @@
       text-align: center;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       transition: transform 0.3s, box-shadow 0.3s;
+      animation: fadeInUp 1.5s ease forwards;
     }
 
     .menu-item:hover {
-      transform: translateY(-8px);
+      transform: translateY(-6px);
       box-shadow: 0 8px 20px rgba(0,0,0,0.2);
     }
 
@@ -123,43 +136,102 @@
       color: #fff;
       text-align: center;
       padding: 1rem;
-      animation: fadeIn 2s ease;
+      font-size: 0.9rem;
+      animation: fadeUp 1.5s ease;
     }
 
-    /* Animations */
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-30px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* Keyframes */
+    @keyframes fadeZoom {
+      0% { opacity: 0; transform: scale(0.8) translateY(30px); }
+      50% { opacity: 0.5; transform: scale(1.05) translateY(10px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(40px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeDown {
+      0% { opacity: 0; transform: translateY(-40px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+      0% { opacity: 0; transform: translateY(40px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes zoomIn {
-      from { transform: scale(1.1); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-
-    @keyframes slideIn {
-      from { width: 0; }
-      to { width: 50px; }
-    }
-
-    /* Responsive */
     @media (max-width: 600px) {
-      .hero { font-size: 1.5rem; height: 220px; }
+      .hero h1 { font-size: 2rem; }
+      .hero p { font-size: 1rem; }
       nav a { padding: 0.5rem 1rem; }
     }
+
+      #gallery {
+    text-align: center;
+    padding: 3rem 1rem;
+    background: #fff;
+  }
+
+  .slider {
+    position: relative;
+    max-width: 900px;
+    margin: auto;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    animation: fadeInUp 1.5s ease forwards;
+  }
+
+  .slides {
+    display: flex;
+    transition: transform 0.8s ease-in-out;
+  }
+
+  .slide {
+    min-width: 100%;
+    transition: opacity 1s ease;
+  }
+
+    .slide img {
+    width: 100%;          /* makes image fit the slider width */
+    height: 400px;        /* fixed medium height */
+    object-fit: cover;    /* crops image proportionally without distortion */
+    border-radius: 10px;
+  }
+
+
+  .navigation {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+  }
+
+  .dot {
+    height: 12px;
+    width: 12px;
+    margin: 0 5px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .dot.active {
+    background-color: #ff9900;
+  }
+
+  @keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(40px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
   </style>
 </head>
-
 <body>
   <header>
     <h1>Hotel Guru Bar & Restaurant</h1>
@@ -174,39 +246,97 @@
   </nav>
 
   <div class="hero">
-    Welcome to Hotel Guru
+    <h1>Welcome to Hotel Guru</h1>
+    <p>Bar & Restaurant • Zari Bk, Tal Chakur, Dist. Latur</p>
   </div>
 
-  <section id="about">
-    <h2>About Us</h2>
-    <p>Hotel Guru Bar & Restaurant offers delicious food, refreshing drinks, and a welcoming atmosphere in Zari Bk, Tal Chakur, Dist. Latur. We pride ourselves on hospitality and quality service.</p>
-  </section>
+ <section id="about">
+  <h2>About Us</h2>
+  <p>
+    At <strong>Hotel Guru Bar & Restaurant</strong>, we believe dining is more than just food — 
+    it’s an experience. Nestled in the heart of Zari Bk, Tal Chakur, Dist. Latur, 
+    our restaurant blends warm hospitality with a vibrant atmosphere that makes 
+    every visit memorable.
+  </p>
+  <p>
+    From traditional favorites to modern culinary delights, our chefs craft each dish 
+    with passion and precision. Whether you’re here for a family dinner, a casual 
+    evening with friends, or a celebration, we promise flavors that excite and 
+    service that makes you feel at home.
+  </p>
+  <p>
+    Step into Hotel Guru and discover why we’re more than just a restaurant — 
+    we’re a destination for great food, refreshing drinks, and unforgettable moments.
+  </p>
+</section>
+
 
   <section id="menu">
     <h2>Our Menu</h2>
     <div class="menu-grid">
-      <div class="menu-item"><h3>Starters</h3><p>Paneer Tikka, Veg Manchurian</p></div>
-      <div class="menu-item"><h3>Main Course</h3><p>Butter Chicken, Veg Biryani</p></div>
-      <div class="menu-item"><h3>Drinks</h3><p>Mocktails, Cocktails, Beer</p></div>
+      <div class="menu-item"><h3>Starters</h3><p>Masala Papad, Chicken Fry, Masala Boil Eggs,</p></div>
+      <div class="menu-item"><h3>Main Course</h3><p>Panner Masala, Kajukari Masala, Butter Chicken, Chicken Biryani,</p></div>
+      <div class="menu-item"><h3>Drinks</h3><p>Beer, Whiskey, Rum, Wine, Vodka</p></div>
       <div class="menu-item"><h3>Desserts</h3><p>Gulab Jamun, Ice Cream</p></div>
     </div>
   </section>
 
-  <section id="gallery">
-    <h2>Gallery</h2>
-    <p>Photos of our restaurant and events will be displayed here.</p>
-  </section>
+ <section id="gallery">
+  <h2>Gallery</h2>
+  <div class="slider">
+    <div class="slides">
+      <div class="slide"><img src="img1.jpeg" alt="Hotel External"></div>
+      <div class="slide"><img src="img2.jpeg" alt="Hotel Name"></div>
+      <div class="slide"><img src="img3.jpeg" alt="Brand"></div>
+      <div class="slide"><img src="img4.jpeg" alt="Chicken Thali"></div>
+      <div class="slide"><img src="img5.jpeg" alt="Overall image"></div>
+     
+    </div>
+    <div class="navigation">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </div>
+</section>
+
 
   <section id="contact">
     <h2>Contact Us</h2>
     <p>📍 Zari Bk, Tal Chakur, Dist. Latur</p>
-    <p>📞 Call us: <a href="tel:+919999999999">+91 99999 99999</a></p>
-    <p>📧 Email: hotelguru@example.com</p>
+    <p>📞 Call us: <a href="tel:+918805178936">+91 8805178936</a></p>
+    <p>📧 Email: hotelguru@gmail.com</p>
+    <p>📽️ Instagram Id: <a href="https://www.instagram.com/hotel_guru_zari_bk?igsh=NGIwNHltanE1YmMx">https://www.instagram.com/hotel_guru_zari_bk?igsh=NGIwNHltanE1YmMx</a></p>
     <p>Follow us on social media for updates!</p>
   </section>
 
   <footer>
     <p>&copy; 2026 Hotel Guru Bar & Restaurant</p>
   </footer>
+
+  <script>
+  const slides = document.querySelector('.slides');
+  const dots = document.querySelectorAll('.dot');
+  let index = 0;
+
+  function showSlide(i) {
+    index = i;
+    slides.style.transform = `translateX(${-index * 100}%)`;
+    dots.forEach(dot => dot.classList.remove('active'));
+    dots[index].classList.add('active');
+  }
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => showSlide(i));
+  });
+
+  setInterval(() => {
+    index = (index + 1) % dots.length;
+    showSlide(index);
+  }, 4000);
+</script>
+
 </body>
 </html>
